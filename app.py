@@ -36,7 +36,7 @@ app = FastAPI(
 )
 
 # Configure CORS securely
-cors_origins = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:8080").split(",")
+cors_origins = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:8080,https://barcode-gene-frontend.vercel.app,https://barcode-gene-frontend-hmnff9rd3-ericytexs-projects.vercel.app").split(",")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=cors_origins,
