@@ -1,0 +1,33 @@
+# Barcode Generator API Requirements
+# Core dependencies for barcode and QR code generation
+
+# Data manipulation and CSV/Excel handling
+pandas>=1.5.0
+openpyxl>=3.0.0
+
+# Image processing and manipulation
+Pillow>=9.0.0
+
+# QR code generation
+qrcode[pil]>=7.4.2
+
+# Barcode generation (Code128, etc.)
+python-barcode>=0.14.0
+
+# PDF generation for combining labels into PDF
+reportlab>=4.0.0
+
+# FastAPI and web framework dependencies
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+python-multipart>=0.0.6
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+
+# Security dependencies
+PyJWT>=2.8.0
+cryptography>=41.0.0
+
+# Additional utilities
+aiofiles>=23.2.0
+httpx>=0.25.0

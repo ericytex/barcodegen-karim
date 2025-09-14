@@ -1,0 +1,10 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Copy just the services directory to test
+COPY services/ ./services/
+
+# List what was copied
+RUN ls -la services/
+RUN find services/ -name "*.py" -type f

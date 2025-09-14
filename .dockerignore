@@ -1,0 +1,86 @@
+# Docker ignore file for Barcode Generator API
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+barcode_env/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+README.md
+*.md
+
+# Test files
+test_*
+*_test.py
+tests/
+
+# Logs
+*.log
+logs/*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Development files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Frontend files (not needed for backend)
+frontend/
+node_modules/
+package.json
+package-lock.json
+yarn.lock
+
+# Generated files (will be created in container)
+downloads/barcodes/*.png
+downloads/pdfs/*.pdf
+uploads/*
+logs/imei_log.csv

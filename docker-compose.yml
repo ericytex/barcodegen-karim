@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  barcode-api:
+    build: .
+    container_name: barcode-generator-api
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - API_PORT=8000
+    volumes:
+      # Persist generated files
+      - ./downloads:/app/downloads
+      - ./logs:/app/logs
+      # Persist database
+      - ./data:/app/data
+      # Persist archives
+      - ./archives:/app/archives
+      # Optional: persist uploads for debugging
+      - ./uploads:/app/uploads
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    # Resource limits for production
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+        reservations:
+          memory: 256M
+          cpus: '0.25'
