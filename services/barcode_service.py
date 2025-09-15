@@ -503,21 +503,18 @@ class BarcodeService:
                 
                 dn = str(item.get(dn_col, 'M8N7')) if dn_col else str(item.get('dn', 'M8N7'))
                 
-                # Validate IMEI - be more flexible with validation
+                # Validate IMEI - use original value as-is without cleaning
                 if not imei or imei.lower() in ['nan', 'none', 'null', '']:
                     print(f"Skipping item {index}: No IMEI found (value: '{imei}')")
                     continue
                 
-                # Clean up IMEI - remove any non-numeric characters except for valid separators
-                imei_clean = ''.join(c for c in str(imei) if c.isdigit())
+                # Use the original IMEI exactly as it appears in Excel - no cleaning
+                imei = str(imei).strip()
                 
-                # If cleaned IMEI is too short, try to generate one
-                if len(imei_clean) < 10:
-                    print(f"Skipping item {index}: IMEI too short ({len(imei_clean)} digits): '{imei_clean}'")
+                # Only validate length, don't modify the IMEI
+                if len(imei) < 5:  # Reduced minimum length to be more flexible
+                    print(f"Skipping item {index}: IMEI too short ({len(imei)} characters): '{imei}'")
                     continue
-                
-                # Use the cleaned IMEI
-                imei = imei_clean
                 
                 # Determine second barcode value and label
                 second_value = box_id
