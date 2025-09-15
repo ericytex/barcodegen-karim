@@ -4,7 +4,7 @@ echo "🧪 Testing All Barcode API Endpoints..."
 echo "========================================"
 
 API_KEY="frontend-api-key-12345"
-BASE_URL_LOCAL="http://localhost:8000"
+BASE_URL_LOCAL="http://localhost:8034"
 BASE_URL_HTTPS="https://barcelona-cleaners-birthday-deleted.trycloudflare.com"
 
 echo ""

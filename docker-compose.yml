@@ -5,10 +5,10 @@ services:
     build: .
     container_name: barcode-generator-api
     ports:
-      - "8000:8000"
+      - "8034:8034"
     environment:
       - PYTHONUNBUFFERED=1
-      - API_PORT=8000
+      - API_PORT=8034
     volumes:
       # Persist generated files
       - ./downloads:/app/downloads
@@ -21,7 +21,7 @@ services:
       - ./uploads:/app/uploads
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8034/api/health"]
       interval: 30s
       timeout: 10s
       retries: 3

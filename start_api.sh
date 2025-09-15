@@ -18,11 +18,11 @@ echo "📦 Checking API dependencies..."
 pip install -r requirements.txt > /dev/null 2>&1
 
 # Start the API server
-echo "🌐 Starting FastAPI server on http://localhost:8000"
-echo "📚 API Documentation: http://localhost:8000/docs"
-echo "🔍 ReDoc Documentation: http://localhost:8000/redoc"
+echo "🌐 Starting FastAPI server on http://localhost:8034"
+echo "📚 API Documentation: http://localhost:8034/docs"
+echo "🔍 ReDoc Documentation: http://localhost:8034/redoc"
 echo ""
 echo "Press Ctrl+C to stop the server"
 echo "=================================="
 
-uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+uvicorn app:app --host 0.0.0.0 --port 8034 --reload

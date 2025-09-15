@@ -34,4 +34,4 @@ async def generate_barcodes(
 if __name__ == "__main__":
     print("🚀 Starting minimal test API...")
     print(f"API Keys: {security_manager.api_keys}")
-    uvicorn.run(app, host="127.0.0.1", port=8000, log_level="info")
+    uvicorn.run(app, host="127.0.0.1", port=8034, log_level="info")

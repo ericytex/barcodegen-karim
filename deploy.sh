@@ -61,17 +61,17 @@ print_status "Waiting for service to be ready..."
 sleep 10
 
 # Check if the service is running (with API key for authenticated endpoints)
-if curl -f -H "X-API-Key: frontend-api-key-12345" http://localhost:8000/api/health > /dev/null 2>&1; then
+if curl -f -H "X-API-Key: frontend-api-key-12345" http://localhost:8034/api/health > /dev/null 2>&1; then
     print_status "✅ Barcode Generator API is running successfully!"
     echo ""
     echo "🌐 API Endpoints:"
-    echo "   - Health Check: http://localhost:8000/api/health"
-    echo "   - API Documentation: http://localhost:8000/docs"
-    echo "   - ReDoc Documentation: http://localhost:8000/redoc"
-    echo "   - Generate Barcodes: http://localhost:8000/api/barcodes/generate"
-    echo "   - Upload Excel: http://localhost:8000/api/barcodes/upload-excel"
-    echo "   - Database Files: http://localhost:8000/api/database/files"
-    echo "   - Archive Statistics: http://localhost:8000/api/archive/statistics"
+    echo "   - Health Check: http://localhost:8034/api/health"
+    echo "   - API Documentation: http://localhost:8034/docs"
+    echo "   - ReDoc Documentation: http://localhost:8034/redoc"
+    echo "   - Generate Barcodes: http://localhost:8034/api/barcodes/generate"
+    echo "   - Upload Excel: http://localhost:8034/api/barcodes/upload-excel"
+    echo "   - Database Files: http://localhost:8034/api/database/files"
+    echo "   - Archive Statistics: http://localhost:8034/api/archive/statistics"
     echo ""
     echo "🔐 Security:"
     echo "   - API Key required for most endpoints"
