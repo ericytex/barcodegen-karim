@@ -65,7 +65,7 @@ async def startup_event():
     print("✅ API startup complete!")
 
 # Health check endpoint
-@app.get("/api/health", response_model=HealthResponse)
+@app.get("/health", response_model=HealthResponse)
 async def health_check(
     api_key: str = Depends(verify_api_key),
     client_ip: str = Depends(check_rate_limit)
@@ -78,7 +78,7 @@ async def health_check(
     )
 
 # Generate barcodes from JSON data
-@app.post("/api/barcodes/generate", response_model=BarcodeGenerationResponse)
+@app.post("/barcodes/generate", response_model=BarcodeGenerationResponse)
 async def generate_barcodes(
     request: BarcodeGenerationRequest,
     api_key: str = Depends(verify_api_key),
@@ -135,7 +135,7 @@ async def generate_barcodes(
         )
 
 # Upload Excel file and generate barcodes
-@app.post("/api/barcodes/upload-excel", response_model=BarcodeGenerationResponse)
+@app.post("/barcodes/upload-excel", response_model=BarcodeGenerationResponse)
 async def upload_excel_and_generate(
     file: UploadFile = File(...),
     create_pdf: bool = True,
@@ -252,7 +252,7 @@ async def upload_excel_and_generate(
         )
 
 # List all generated files
-@app.get("/api/barcodes/list", response_model=FileListResponse)
+@app.get("/barcodes/list", response_model=FileListResponse)
 async def list_generated_files(
     api_key: str = Depends(verify_api_key),
     client_ip: str = Depends(check_rate_limit)
@@ -281,7 +281,7 @@ async def list_generated_files(
         )
 
 # Download individual PNG file
-@app.get("/api/barcodes/download/{filename}")
+@app.get("/barcodes/download/{filename}")
 async def download_barcode_file(
     filename: str,
     api_key: str = Depends(verify_api_key),
@@ -314,7 +314,7 @@ async def download_barcode_file(
         )
 
 # Download PDF file
-@app.get("/api/barcodes/download-pdf/{filename}")
+@app.get("/barcodes/download-pdf/{filename}")
 async def download_pdf_file(filename: str):
     """Download a generated PDF file"""
     try:
@@ -343,7 +343,7 @@ async def download_pdf_file(filename: str):
         )
 
 # Create PDF from existing barcodes
-@app.post("/api/barcodes/create-pdf", response_model=BarcodeGenerationResponse)
+@app.post("/barcodes/create-pdf", response_model=BarcodeGenerationResponse)
 async def create_pdf_from_existing(
     grid_cols: int = 5,
     grid_rows: int = 12,
@@ -400,7 +400,7 @@ async def root():
 
 # Database and Archive Management Endpoints
 
-@app.get("/api/archive/sessions", response_model=dict)
+@app.get("/archive/sessions", response_model=dict)
 async def get_archive_sessions(
     limit: int = 10,
     api_key: str = Depends(verify_api_key),
@@ -416,7 +416,7 @@ async def get_archive_sessions(
             detail=f"Failed to get archive sessions: {str(e)}"
         )
 
-@app.get("/api/archive/session/{session_id}/files", response_model=dict)
+@app.get("/archive/session/{session_id}/files", response_model=dict)
 async def get_session_files(
     session_id: str,
     api_key: str = Depends(verify_api_key),
@@ -432,7 +432,7 @@ async def get_session_files(
             detail=f"Failed to get session files: {str(e)}"
         )
 
-@app.get("/api/archive/statistics", response_model=dict)
+@app.get("/archive/statistics", response_model=dict)
 async def get_archive_statistics(
     api_key: str = Depends(verify_api_key),
     client_ip: str = Depends(check_rate_limit)
@@ -447,7 +447,7 @@ async def get_archive_statistics(
             detail=f"Failed to get archive statistics: {str(e)}"
         )
 
-@app.get("/api/database/files", response_model=dict)
+@app.get("/database/files", response_model=dict)
 async def get_all_files(
     api_key: str = Depends(verify_api_key),
     client_ip: str = Depends(check_rate_limit)
@@ -462,7 +462,7 @@ async def get_all_files(
             detail=f"Failed to get files: {str(e)}"
         )
 
-@app.get("/api/database/file/{filename}", response_model=dict)
+@app.get("/database/file/{filename}", response_model=dict)
 async def get_file_by_name(
     filename: str,
     api_key: str = Depends(verify_api_key),
