@@ -66,6 +66,7 @@ async def startup_event():
 
 # Health check endpoint
 @app.get("/health", response_model=HealthResponse)
+@app.get("/api/health", response_model=HealthResponse)  # Backward compatibility
 async def health_check(
     api_key: str = Depends(verify_api_key),
     client_ip: str = Depends(check_rate_limit)
@@ -79,6 +80,7 @@ async def health_check(
 
 # Generate barcodes from JSON data
 @app.post("/barcodes/generate", response_model=BarcodeGenerationResponse)
+@app.post("/api/barcodes/generate", response_model=BarcodeGenerationResponse)  # Backward compatibility
 async def generate_barcodes(
     request: BarcodeGenerationRequest,
     api_key: str = Depends(verify_api_key),
@@ -136,6 +138,7 @@ async def generate_barcodes(
 
 # Upload Excel file and generate barcodes
 @app.post("/barcodes/upload-excel", response_model=BarcodeGenerationResponse)
+@app.post("/api/barcodes/upload-excel", response_model=BarcodeGenerationResponse)  # Backward compatibility
 async def upload_excel_and_generate(
     file: UploadFile = File(...),
     create_pdf: bool = True,
@@ -253,6 +256,7 @@ async def upload_excel_and_generate(
 
 # List all generated files
 @app.get("/barcodes/list", response_model=FileListResponse)
+@app.get("/api/barcodes/list", response_model=FileListResponse)  # Backward compatibility
 async def list_generated_files(
     api_key: str = Depends(verify_api_key),
     client_ip: str = Depends(check_rate_limit)
