@@ -1,10 +1,10 @@
 #!/bin/bash
 
-echo "🌐 Testing External Barcode API Endpoints"
-echo "=========================================="
+echo "🌐 Testing External Barcode API Endpoints (Direct HTTPS)"
+echo "======================================================="
 
 API_KEY="frontend-api-key-12345"
-TUNNEL_URL="https://barcelona-cleaners-birthday-deleted.trycloudflare.com"
+TUNNEL_URL="https://194.163.134.129:8034"
 
 echo ""
 echo "🔍 Testing NEW endpoints (without /api):"

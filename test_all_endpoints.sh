@@ -5,7 +5,7 @@ echo "========================================"
 
 API_KEY="frontend-api-key-12345"
 BASE_URL_LOCAL="http://localhost:8034"
-BASE_URL_HTTPS="https://barcelona-cleaners-birthday-deleted.trycloudflare.com"
+BASE_URL_HTTPS="https://194.163.134.129:8034"
 
 echo ""
 echo "🔍 Testing LOCAL endpoints (new format without /api):"
@@ -27,8 +27,8 @@ echo "4. Barcodes list (old):"
 curl -s -H "X-API-Key: $API_KEY" "$BASE_URL_LOCAL/api/barcodes/list" | jq . || echo "❌ Failed"
 
 echo ""
-echo "🌐 Testing HTTPS endpoints (via Cloudflare Tunnel):"
-echo "--------------------------------------------------"
+echo "🌐 Testing HTTPS endpoints (direct server):"
+echo "------------------------------------------"
 
 echo "5. Health endpoint HTTPS (new):"
 curl -s -H "X-API-Key: $API_KEY" "$BASE_URL_HTTPS/health" | jq . || echo "❌ Failed"
