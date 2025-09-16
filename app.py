@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Optional
 import os
 import asyncio
-from datetime import datetime
+from utils.safe_logger import safe_logger
 
 # Import our models and services
 from models.barcode_models import (
@@ -47,7 +47,7 @@ additional_origins = [
 # Combine and deduplicate origins
 all_origins = list(set(cors_origins + additional_origins))
 
-print(f"🌐 CORS Origins configured: {all_origins}")
+safe_logger.info("CORS Origins configured", all_origins)
 
 app.add_middleware(
     CORSMiddleware,
@@ -69,12 +69,12 @@ db_manager = DatabaseManager()
 @app.on_event("startup")
 async def startup_event():
     """Initialize the application"""
-    print("🚀 Starting Barcode Generator API...")
+    safe_logger.info("Starting Barcode Generator API")
     # Clean up old files on startup
     cleanup_old_files("uploads", max_age_hours=24)
     cleanup_old_files("downloads/barcodes", max_age_hours=24)
     cleanup_old_files("downloads/pdfs", max_age_hours=24)
-    print("✅ API startup complete!")
+    safe_logger.info("API startup complete")
 
 # Health check endpoint
 @app.get("/health", response_model=HealthResponse)
@@ -510,8 +510,8 @@ if __name__ == "__main__":
     ssl_certfile = "certificates/server.crt"
     
     if os.path.exists(ssl_keyfile) and os.path.exists(ssl_certfile):
-        print("🔐 Starting FastAPI server with HTTPS (self-signed certificate)")
-        print("⚠️  Browsers will show a security warning - this is normal for self-signed certificates")
+        safe_logger.info("Starting FastAPI server with HTTPS (self-signed certificate)")
+        safe_logger.warning("Browsers will show a security warning - this is normal for self-signed certificates")
         uvicorn.run(
             app, 
             host="0.0.0.0", 
@@ -520,6 +520,6 @@ if __name__ == "__main__":
             ssl_certfile=ssl_certfile
         )
     else:
-        print("🔓 Starting FastAPI server with HTTP (no SSL certificates found)")
-        print("💡 Run './generate_ssl_cert.sh' to enable HTTPS")
+        safe_logger.info("Starting FastAPI server with HTTP (no SSL certificates found)")
+        safe_logger.info("Run './generate_ssl_cert.sh' to enable HTTPS")
         uvicorn.run(app, host="0.0.0.0", port=8034)
