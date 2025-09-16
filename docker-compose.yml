@@ -17,6 +17,8 @@ services:
       - ./data:/app/data
       # Persist archives
       - ./archives:/app/archives
+      # SSL certificates for HTTPS
+      - ./certificates:/app/certificates
       # Optional: persist uploads for debugging
       - ./uploads:/app/uploads
     restart: unless-stopped

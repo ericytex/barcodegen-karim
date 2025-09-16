@@ -491,4 +491,23 @@ async def get_file_by_name(
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8034)
+    import os
+    
+    # Check if SSL certificates exist
+    ssl_keyfile = "certificates/server.key"
+    ssl_certfile = "certificates/server.crt"
+    
+    if os.path.exists(ssl_keyfile) and os.path.exists(ssl_certfile):
+        print("🔐 Starting FastAPI server with HTTPS (self-signed certificate)")
+        print("⚠️  Browsers will show a security warning - this is normal for self-signed certificates")
+        uvicorn.run(
+            app, 
+            host="0.0.0.0", 
+            port=8034,
+            ssl_keyfile=ssl_keyfile,
+            ssl_certfile=ssl_certfile
+        )
+    else:
+        print("🔓 Starting FastAPI server with HTTP (no SSL certificates found)")
+        print("💡 Run './generate_ssl_cert.sh' to enable HTTPS")
+        uvicorn.run(app, host="0.0.0.0", port=8034)
