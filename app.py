@@ -37,11 +37,23 @@ app = FastAPI(
 
 # Configure CORS securely
 cors_origins = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:8080").split(",")
+
+# Add additional Vercel domains dynamically
+additional_origins = [
+    "https://barcode-gene-frontend.vercel.app",
+    "https://barcode-gene-frontend-hmnff9rd3-ericytexs-projects.vercel.app"
+]
+
+# Combine and deduplicate origins
+all_origins = list(set(cors_origins + additional_origins))
+
+print(f"🌐 CORS Origins configured: {all_origins}")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=cors_origins,
+    allow_origins=all_origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST"],
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
 
