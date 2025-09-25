@@ -46,7 +46,7 @@ EXPOSE 8034
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8034/healthz || exit 1
+    CMD curl -k -f https://localhost:8034/healthz || exit 1
 
 # Run the application with SSL support if certificates exist
 CMD ["sh", "-c", "if [ -f certificates/server.key ] && [ -f certificates/server.crt ]; then echo '🔐 Starting with HTTPS'; uvicorn app:app --host 0.0.0.0 --port ${API_PORT:-8034} --workers 1 --ssl-keyfile certificates/server.key --ssl-certfile certificates/server.crt; else echo '🔓 Starting with HTTP'; uvicorn app:app --host 0.0.0.0 --port ${API_PORT:-8034} --workers 1; fi"]

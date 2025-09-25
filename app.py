@@ -36,7 +36,7 @@ app = FastAPI(
 )
 
 # Configure CORS securely
-cors_origins = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://localhost:8080").split(",")
+cors_origins = os.getenv("CORS_ORIGINS", "http://localhost:8034,http://localhost:8080").split(",")
 
 # Add additional Vercel domains dynamically
 additional_origins = [
