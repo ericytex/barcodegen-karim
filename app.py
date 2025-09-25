@@ -80,6 +80,7 @@ async def startup_event():
 @app.get("/healthz")
 async def health_check_simple():
     """Simple health check endpoint for Docker health checks"""
+    from datetime import datetime
     return {"status": "healthy", "timestamp": datetime.now().isoformat()}
 
 # Health check endpoint
