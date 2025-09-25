@@ -76,6 +76,12 @@ async def startup_event():
     cleanup_old_files("downloads/pdfs", max_age_hours=24)
     safe_logger.info("API startup complete")
 
+# Simple health check endpoint (no auth required for Docker health checks)
+@app.get("/healthz")
+async def health_check_simple():
+    """Simple health check endpoint for Docker health checks"""
+    return {"status": "healthy", "timestamp": datetime.now().isoformat()}
+
 # Health check endpoint
 @app.get("/health", response_model=HealthResponse)
 @app.get("/api/health", response_model=HealthResponse)  # Backward compatibility
